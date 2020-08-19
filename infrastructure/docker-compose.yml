@@ -1,0 +1,50 @@
+version: "3.7"
+
+x-be-service-template: &be-service-template
+  env_file:
+    - .env
+  restart: unless-stopped
+  networks:
+    - backend
+  command: ["yarn", "start:dev"]
+
+services:
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_NAME}
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 1234:8080
+
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:9999
+    environment:
+      DOZZLE_ADDR: :9999
+      DOZZLE_LEVEL: ${LOG_LEVEL}
+
+  be.posts.service: &be-posts-service
+    <<: *be-service-template
+    build: ../services/posts
+    container_name: be.posts.service
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ../services/posts:/app
+
+networks:
+  backend:
