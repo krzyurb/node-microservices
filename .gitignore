@@ -118,3 +118,6 @@ dist
 # Notes
 *.todo
 *.notes
+
+# MacOS
+.DS_Store
