@@ -1,6 +1,21 @@
-### Deployment environment variables
+### Initial setup
 
-* AWS_ACCESS_KEY_ID
-* AWS_ACCOUNT_ID
-* AWS_REGION
-* AWS_SECRET_ACCESS_KEY
+1. Run `./setup.sh` to prepare infrastructure for terraform. It will create S3 bucket to store `terraform.tfstate`.
+
+2. Initialize terraform and apply infrastructure:
+
+```sh
+  $ terraform init
+  $ terraform apply
+```
+
+2. Fill CICD with secrets:
+
+* `AWS_ACCESS_KEY_ID`
+* `AWS_ACCOUNT_ID`
+* `AWS_REGION`
+* `AWS_SECRET_ACCESS_KEY`
+
+## TODO
+
+* Use DynamoDB for Terraform locks

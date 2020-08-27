@@ -2,8 +2,8 @@ name: Posts service
 
 on:
   push:
-    paths:
-      - services/posts/**
+    # paths:
+    #   - services/posts/**
     branches:
       - master
 
