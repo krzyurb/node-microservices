@@ -11,16 +11,25 @@
   $ terraform apply
 ```
 
-2. Fill CICD with secrets:
+3. Fill CICD with secrets:
 
 * `AWS_ACCESS_KEY_ID`
 * `AWS_ACCOUNT_ID`
 * `AWS_REGION`
 * `AWS_SECRET_ACCESS_KEY`
 
-## Local development
+### Local development
 
-All services and tools are available via `localhost:8080`.
+Set up local environment:
+
+```sh
+  cd infrastructure
+  cp .env.example .env # copy and fill env's
+  make init            # initialize each services
+  make up              # start whole infrastructure
+  make logs            # show logs
+  make down            # shut down docker compose
+```
 
 ### Monitoring
 

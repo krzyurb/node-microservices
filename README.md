@@ -1,28 +1,14 @@
-# Nest.js microservices
+# Node.js microservices
 
-Monorepo Nest.js microservices architecture.
+Monorepo of node.js microservices architecture.
 
 ## 📦 Project Structure
 
 ```sh
 .
-├── infrastructure/
-└── services/
+├── .github/        # CICD (github actions)
+├── infrastructure/ # Terraform code and environment local dev
+├── documentation/  # OpenAPI docs
+└── services/       # Backend microservices
     └── posts
-```
-
-## 🧰 Stack
-
-* [Nest.js](https://nestjs.com/)
-
-## ⚙️ Local development
-
-### Set up local environment
-
-```sh
-  cd infrastructure
-  make init        # initialize each services
-  make up          # start whole infrastructure
-  make logs        # show logs
-  make down        # shut down docker compose
 ```
