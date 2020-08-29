@@ -64,6 +64,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: posts_service
+        service: posts-service
         cluster: photos
         wait-for-service-stability: true
