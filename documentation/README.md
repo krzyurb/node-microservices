@@ -2,4 +2,4 @@
 
 ## Openapi
 
-Use [localhost:8888](http://localhost:8888/) to preview openapi documentation.
+Use [Redoc](http://localhost:8080/docs/) to preview openapi documentation.

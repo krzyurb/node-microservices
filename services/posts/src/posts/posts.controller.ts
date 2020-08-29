@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { Post } from './interfaces/post.interface';
 
-@Controller('posts')
+@Controller('/')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 

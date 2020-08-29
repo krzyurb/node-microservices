@@ -9,6 +9,15 @@ x-be-service-template: &be-service-template
   command: ["yarn", "start:dev"]
 
 services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 8080:80
+    networks:
+      - backend
+
   db:
     container_name: db
     image: postgres
@@ -17,45 +26,47 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_NAME}
+    networks:
+      - backend
 
   adminer:
     container_name: adminer
     image: adminer
     restart: always
-    ports:
-      - 7777:8080
+    networks:
+      - backend
 
   dozzle:
     container_name: dozzle
     image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 9999:9999
     environment:
-      DOZZLE_ADDR: :9999
+      DOZZLE_BASE: /logs
       DOZZLE_LEVEL: ${LOG_LEVEL}
+    networks:
+      - backend
 
   docs:
     container_name: docs
     image: redocly/redoc
-    ports:
-      - 8888:80
     volumes:
       - ../documentation/openapi.yaml:/usr/share/nginx/html/openapi.yaml
     environment:
       SPEC_URL: openapi.yaml
       PAGE_TITLE: Docs
+    networks:
+      - backend
 
   be.posts.service: &be-posts-service
     <<: *be-service-template
     build: ../services/posts
     container_name: be.posts.service
     restart: unless-stopped
-    ports:
-      - 3000:3000
     volumes:
       - ../services/posts:/app
+    networks:
+      - backend
 
 networks:
   backend:

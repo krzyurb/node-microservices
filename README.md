@@ -26,8 +26,3 @@ Monorepo Nest.js microservices architecture.
   make logs        # show logs
   make down        # shut down docker compose
 ```
-
-## Monitoring
-
-- [Dozzle](http://localhost:9999/) - containers logs
-- [Adminer](http://localhost:1234/) - database panel
